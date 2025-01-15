@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    //movementSpeed er en variabel, der bestemmer bevægelseshastigheden.
-    //Vi skriver "public" fordi vi gerne vil kunne tilgå den i Unity Inspector
+    //movementSpeed er en variabel, der bestemmer bevï¿½gelseshastigheden.
+    //Vi skriver "public" fordi vi gerne vil kunne tilgï¿½ den i Unity Inspector
     //Vi skriver "float" fordi det er et decimaltal
-    //"movementSpeed" er det navn, vi har givet vores variabel. Vi kunne også kalde den "speed", "x" eller "Fortnite4Ever"
+    //"movementSpeed" er det navn, vi har givet vores variabel. Vi kunne ogsï¿½ kalde den "speed", "x" eller "Fortnite4Ever"
    
 
     public float movementSpeed;
@@ -19,23 +19,11 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.UpArrow))
-        {
-            transform.Translate(Vector3.up * movementSpeed * Time.deltaTime);
-        }
-
-        if (Input.GetKey(KeyCode.DownArrow))
-        {
-            transform.Translate(Vector3.down * movementSpeed * Time.deltaTime);
-        }
-
-        if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            //INDSÆT DIN KODE HER
-        }
-
-        //INDSÆT DIN KODE HER
-        //HVAD SKAL DU SKRIVE HER FOR AT BEVÆGE KARAKTEREN TIL HØJRE, NÅR DU TRYKKER PÅ HØJRE PILETAST?
-
+        int horizontalInput = (Input.GetKey(KeyCode.RightArrow) ? 1 : 0) - (Input.GetKey(KeyCode.LeftArrow) ? 1 : 0);
+        int verticalInput = (Input.GetKey(KeyCode.UpArrow) ? 1 : 0) - (Input.GetKey(KeyCode.DownArrow) ? 1 : 0);
+        
+        var movement = Vector3.Normalize(new(horizontalInput, verticalInput));
+        
+        transform.Translate(movementSpeed * Time.deltaTime * movement);
     }
 }
